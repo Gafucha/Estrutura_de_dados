@@ -17,12 +17,49 @@ class Indexador:
         self.ind = 0
         #Forçando o usuário a colocar um valor conhecido
         while self.ind != 1 and self.ind != 2 and self.ind != 3 and self.ind != 4 and self.ind != 5:
-            self.ind = int(input('~~~~~Interface do projeto~~~~~\n1.Inserir pessoa\n2. Colocar pessoas no trem\n3. Verificar fila\n4.Verificar lotação do trem\n5. Encerrar'))
+            self.ind = int(input('~~~~~Interface do projeto~~~~~\n1. Inserir pessoa\n2. Colocar a primeira pessoa da fila no trem\n3. Verificar fila\n4. Verificar lotação do trem\n5. Encerrar\n'))
         match self.ind:
-            #Inserir pessoa
+            #Inserir pessoa na fila
             case 1:
-                self.dq.append('pessoa')
+                self.dq.append(Pes(input('Insira o nome da pessoa: ')))
+                self.interf()
+                print('Pessoa inserida com sucesso!\n')
+            #Colocando pessoa no trem
             case 2:
-                self.trem.append(self.dq[0])
-                self.dq.append
+                if len(self.dq) == 0:
+                    print('Não tem ninguém na fila do trem!\n')
+                else:
+                    self.trem.append(self.dq[0])
+                    self.dq.popleft()
+                    self.ocup += 1
+                    print(f'{self.trem[len(self.trem)-1].nome} foi adicionada no trem\n')
+                self.interf()
+            #Listar
+            case 3:
+                if self.ocup == 0:
+                    print('A fila está vazia!')
+                else:
+                    for i in range(0, self.dq):
+                        print(f'{i+1}º Pessoa: {self.dq[i].nome}\n')
+                self.interf()
+            #Listar o trem e lotação
+            case 4:
+                if self.ocup == 0:
+                    print('O trem está vazio!')
+                else:
+                    for i in range(0, self.trem):
+                        print(f'{i+1}º Pessoa: {self.trem[i].nome}\n')
+                    print(f'\n A ocupação do trem atual é de {(self.ocup/self.max)*100}% de {self.max}, ou seja, {self.ocup} lugares estão ocupados')
+                self.interf()
+            #Encerramento
+            case 5:
+                print(f'Enviando o trem atual com: {self.ocup} pessoas...')
+#Classe pra pessoa
+class Pes:
+    def __init__(self, nome):
+        self.nome = nome
 
+
+#Teste
+index = Indexador()
+index.interf()

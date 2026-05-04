@@ -18,36 +18,49 @@ class Indexador:
         match self.ind:
             #Inserir item no carrinho
             case 1:
-                self.dq.appendleft()
-                self.interf()
+                if len(self.dq == 0):
+                    print('O primeiro item da lista foi adicionado, que comecem as compras!')
+                else:
+                    self.dq.appendleft()
+                    self.interf()
+                    print('Item adicionado com sucesso')
             #Pagar item do topo / remover
             case 2:
-                item = Item(input('Insira o nome do produto'), input('Insira o preço do produto'))
-                for i in range(0, len(self.dq.pago)):
-                    total += self.dqpago[i].preco
-                #Verificando se já está no limite
-                if total == self.max:
-                    print('Você já gastou seu valor limite!')
-                #Verificando se vai caber
-                elif total + item.preco > self.max:
-                    print('Esse item estoura sua cota!')
+                if len(self.dqpago) == 0:
+                    print('O carrinho está vazio!')
                 else:
-                    self.dqpago.appendleft(Item(self.dq[0].nome, self.dq[0].preco))
-                    self.dq.popleft()
-                    print('Comprado com sucesso!')
-                self.interf()
+                    item = Item(input('Insira o nome do produto'), input('Insira o preço do produto'))
+                    for i in range(0, len(self.dqpago)):
+                        total += self.dqpago[i].preco
+                    #Verificando se já está no limite
+                    if total == self.max:
+                        print('Você já gastou seu valor limite!')
+                    #Verificando se vai caber
+                    elif total + item.preco > self.max:
+                        print('Esse item estoura sua cota!')
+                    else:
+                        self.dqpago.appendleft(Item(self.dq[0].nome, self.dq[0].preco))
+                        self.dq.popleft()
+                        print('Comprado com sucesso!')
+                    self.interf()
             #Listar
             case 3:
-                for i in range(0, self.dq):
-                    print(self.dq[i].nome,'\n')
-                self.interf()
+                if len(self.dq) == 0:
+                    print('O carrinho está vazio!')
+                else:
+                    for i in range(0, self.dq):
+                        print(self.dq[i].nome,'\n')
+                    self.interf()
             #Calcular valor pago
             case 4:
-                pago = 0
-                for i in range(0, self.dqpago):
-                    pago += self.dqpago[i].preco
-                print(f'O valor pago até agora foi {pago}')
-                self.interf()
+                if len(self.dqpago) == 0:
+                    print('Nada foi pago ainda!')
+                else:
+                    pago = 0
+                    for i in range(0, self.dqpago):
+                        pago += self.dqpago[i].preco
+                    print(f'O valor pago até agora foi {pago}')
+                    self.interf()
             #Finalizar a compra
             case 5:
                 print('Finalizando...') 
