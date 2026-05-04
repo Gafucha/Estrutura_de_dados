@@ -7,7 +7,7 @@ class Indexer:
     def iniciar(self):
         self.ind = 0
         while self.ind != 1 and self.ind != 2:
-            self.ind = int(input('Qual operação você gostaria de realizar?\n1. Inserir processo\n2. Iniciar o programa\n3. Imprimir a lista de processos\n4. Imprimir a lista concluida\nInsira apenas o número da operação: '))
+            self.ind = int(input('Qual operação você gostaria de realizar?\n1. Inserir processo\n2. Iniciar o programa\nInsira apenas o número da operação: '))
         match self.ind:
             #1. Inserir processo
             case 1:

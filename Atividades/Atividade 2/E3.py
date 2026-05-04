@@ -136,4 +136,4 @@ class Lista:
 
 #Código
 ind = Indexer()
-ind.iniciar()
+ind.iniciar()   

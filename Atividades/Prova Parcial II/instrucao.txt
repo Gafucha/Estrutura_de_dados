@@ -1,0 +1,58 @@
+#####Primeiro exercício - Lista Duplamente Encadeada (4 pontos)
+###Contexto: O departamento de gerenciamento de projetos da NASA precisa de ajuda, a NASA contratou engenheiros de foguete demais e esqueceu de contratar gerentes de projeto. E você é um desses engenheiros (Halley) que felizmente tem como hobby estudar python, ao invés da empresa contratar novos funcionários você dá a sugestão de fazer uma solução em python para o gerenciamento de projetos da empresa, o CEO da NASA amou sua ideia e decidiu te dar um aumento de salário (R$ 75) se você conseguisse. Assim o CEO da NASA te passou as instruções da solução.
+O CEO deseja que você monte um gerenciador de projeto capaz de controlar as tarefas de um projeto, cada tarefa possui um tempo para ser realizada e o projeto possui um tempo máximo para ser realizado, o tempo total das tarefas deve ser menor ou igual ao tempo máximo do projeto. 
+As tarefas devem ser inseridas no final da lista e concluídas pelo nome (Não pela ordem), a lista deve manter o registro do primeiro e do último elemento em todo momento e tarefas concluídas são enviadas para uma lista separada com as tarefas concluídas.
+###Instruções:
+O gerenciador de projeto deve ser capaz de (Por meio de uma interface):
+    - Inserir tarefa (no final)
+    - Concluir tarefa (por nome)
+    - Calcular taxa de conclusão (Número de tarefas a fazer + Número de tarefas concluídas / total tarefas)
+    - Calcular o tempo restante (Tempo do projeto - tempo total das tarefas)
+    - Relatório das tarefas (O relatório deve mostrar a fila de tarefas)
+    - Finalizar projeto (Não podem haver tarefas pendentes)
+
+As tarefas (Nó) devem possuir os seguintes campos:
+    - Esquerda
+    - Direita
+    - Nome
+    - Tempo da tarefa
+
+A classe Lista deve possuir *somente* os seguintes campos (Para manter o registro dos itens concluídos, utilize uma lista separada):
+    - Inicio (Lista das tarefas pendentes)
+    - Fim (Lista das tarefas pendentes)
+    - Tamanho
+    - Tempo do projeto
+
+
+
+#####Segundo exercício - Pilha (3 pontos)
+###Contexto: Você é responsável pela criação da função de carrinho do site da Pringles! Para seguir com a tradição do tubo de batatinhas Pringles onde é desrespeitosamente difícil pegar mais que uma batata de uma vez e sempre pegando a do topo, a equipe de marketing te deixou a tarefa de fazer o carrinho da mesma forma, apenas os itens do topo do carrinho podem ser pagos e o processo deve ser repetido até o carrinho estar vazio, mas com uma alteração, sabendo que os produtos Pringles atiçam a fome de quem compra, antes de poder comprar o usuário deve inserir seu limite de gastos para impedir gastos maiores que o planejado por causa da nossa gostosura. Na adição de produtos no carrinho, os detalhes do produto também deverão ser guardados (preço e nome). E que tipo de design não deixa o cliente ver o que tem no carrinho dele? Por isso você deve implementar também uma função para que o usuário possa ver seu carrinho do topo até o fundo. Para que o cliente não perca a conta de todos os produtos pagos, deve ser mantido o registro de todos os itens já pagos também.
+###Instruções
+O usuário deve ser capaz de interagir com o site por meio de uma interface com as seguintes funções:
+    - Perguntar ao usuário seu valor máximo de gastos
+    - Adicionar um item no topo do carrinho (Adicionar na pilha)
+    - Pagar pelo item no topo do carrinho (Remover da pilha do carrinho e adicionar a um registro de itens pagos)
+    - Listar itens do carrinho (Também faz a verificação da pilha vazia)
+    - Calcular valor pago (Calcula quanto já foi pago)
+    - Finalizar a compra (Lista o total comprado)
+
+Os itens da pilha devem ter minimamente:
+    - Nome
+    - Preço
+
+
+
+#####Terceiro exercício - Fila (3 pontos)
+###Contexto: As viagens de trem vem enfrentando problemas por conta da falta de organização dos trens, muitas pessoas entrando e muitas saindo fazendo com que alguns fiquem sem lugar onde sentar e isso é inaceitável. Então para que todos possam sentar, você deve criar um sistema de organização de viagem para trens. O sistema deve funcionar da seguinte forma, ao iniciar o programa o organizador de viagem será perguntado "quantos vagões possui esse trem?" e "Quantos assentos possui um vagão?", com esses valores em mente, o organizador então deverá adicionar pessoas na fila para o trem, ao chegar um trem, o código deverá encher o trem com pessoas da fila na ordem de chegada até que a fila esteja vazia ou o trem esteja cheio, mantendo o resto da lista para o próximo trem. Para manter o registro de quantas pessoas estão aguardando, o operador deve também poder ver a lista de pessoas na fila.
+###Instruções:
+O sistema de organização de trens deverá fazer por meio de uma interface as seguintes operações:
+    - Pedir ao organizador o número de vagões do trem e número de assentos por vagão
+    - Inserir pessoa (Inserir uma pessoa no final da fila do trem)
+    - Colocar pessoas no trem (Inserir um número de pessoas do inicio da fila no trem e remover da fila)
+    - Verificar pessoas na fila
+    - Verificar lotação do trem atual
+    - Finalizar operação
+
+O trem deve manter o registro de:
+    - Ocupação atual
+    - Ocupação máxima
