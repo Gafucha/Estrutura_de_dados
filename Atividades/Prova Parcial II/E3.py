@@ -24,4 +24,5 @@ class Indexador:
                 self.dq.append('pessoa')
             case 2:
                 self.trem.append(self.dq[0])
+                self.dq.append
 
