@@ -22,24 +22,26 @@ class Indexador:
             #Inserir pessoa na fila
             case 1:
                 self.dq.append(Pes(input('Insira o nome da pessoa: ')))
-                self.interf()
                 print('Pessoa inserida com sucesso!\n')
+                self.interf()
             #Colocando pessoa no trem
             case 2:
                 if len(self.dq) == 0:
                     print('Não tem ninguém na fila do trem!\n')
-                else:
+                elif len(self.trem) < self.max:
                     self.trem.append(self.dq[0])
                     self.dq.popleft()
                     self.ocup += 1
                     print(f'{self.trem[len(self.trem)-1].nome} foi adicionada no trem\n')
+                else:
+                    print('O trem já está lotado!')
                 self.interf()
             #Listar
             case 3:
                 if self.ocup == 0:
                     print('A fila está vazia!')
                 else:
-                    for i in range(0, self.dq):
+                    for i in range(0, len(self.dq)):
                         print(f'{i+1}º Pessoa: {self.dq[i].nome}\n')
                 self.interf()
             #Listar o trem e lotação
@@ -47,7 +49,7 @@ class Indexador:
                 if self.ocup == 0:
                     print('O trem está vazio!')
                 else:
-                    for i in range(0, self.trem):
+                    for i in range(0, len(self.trem)):
                         print(f'{i+1}º Pessoa: {self.trem[i].nome}\n')
                     print(f'\n A ocupação do trem atual é de {(self.ocup/self.max)*100}% de {self.max}, ou seja, {self.ocup} lugares estão ocupados')
                 self.interf()

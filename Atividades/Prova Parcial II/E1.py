@@ -10,7 +10,7 @@ class Indexador:
         self.ind = 0
         #Forçando o usuário a colocar um valor conhecido
         while self.ind != 1 and self.ind != 2 and self.ind != 3 and self.ind != 4 and self.ind != 5 and self.ind != 6:
-            self.ind = int(input('~~~~~Interface do projeto~~~~~\n1. Inserir tarefa\n2. Concluir tarefa\n3. Calcular taxa de conclusão\n4. Calcular o tempo restante\n5. Relatório das tarefas\n6. Finalizar projeto'))
+            self.ind = int(input('~~~~~Interface do projeto~~~~~\n1. Inserir tarefa\n2. Concluir tarefa\n3. Calcular taxa de conclusão\n4. Calcular o tempo restante\n5. Relatório das tarefas\n6. Finalizar projeto\n'))
         match self.ind:
             #Inserir tarefa
             case 1:
@@ -18,18 +18,20 @@ class Indexador:
                 self.interf()
             #Concluir tarefa / remover
             case 2:
-                no = self.lista_pendente.concluir(input('Insira o nome da tarefa a ser removida: '))
-                self.lista_concluida.inserir(no.nome, no.tempo_tarefa)
+                no = self.lista_pendente.concluir(input('Insira o nome da tarefa a ser concluída: '))
+                if no == None:
+                    print('O nome inserido não foi encontrado')
+                else:
+                    self.lista_concluida.inserir(no.nome, no.tempo_tarefa)
                 self.interf()
             #Calcular taxa de conclusão
             case 3:
                 arm = self.lista_concluida.inicio
                 tempo_conc = int(0)
-                tar_conc = int(0)
+                tempo_pend = int(0)
                 #Verificando se a lista já está concluida
                 while arm:
                     tempo_conc += arm.tempo_tarefa
-                    tar_conc += 1
                     arm = arm.dir
                 #Verificando se a lista concluida está cheia
                 if tempo_conc == int(self.lista_pendente.tempo_projeto):
@@ -40,22 +42,27 @@ class Indexador:
                 #Pegando o tempo da lista pendente
                 else:
                     arm = self.lista_pendente.inicio
-                    tar_pend = int(0)
                     #Juntando o valor pendente
                     while arm:
-                        tar_pend += 1
+                        tempo_pend += arm.tempo_tarefa
                         arm = arm.dir
-                    print(f'A taxa de conclusão do projeto é de: {(int(tar_pend) / (int(tar_pend) + int(tar_conc))) * 100}%')
+                    print(f'A taxa de conclusão do projeto é de: {(int(tempo_conc) / (int(tempo_pend) + int(tempo_conc))) * 100}% (Esse tempo é baseado na lista atual de tarefas, não o tempo total de conclusão do projeto, ainda faltam {self.lista_pendente.tempo_projeto - (tempo_conc + tempo_pend)} unidades de tempo)')
                 self.interf()
             #Calcular o tempo restante
             case 4:
                 arm = self.lista_pendente.inicio
                 temp_pend = int(0)
+                temp_conc = int(0)
                 #Juntando o valor pendente
                 while arm:
                     temp_pend += arm.tempo_tarefa
                     arm = arm.dir
-                print(f'O tempo restante é {self.lista_pendente.tempo_projeto - int(temp_pend)}')
+                arm = self.lista_concluida.inicio
+                #Juntando o valor concluido
+                while arm:
+                    temp_conc += arm.tempo_tarefa
+                    arm = arm.dir
+                print(f'O tempo restante é {self.lista_pendente.tempo_projeto - (int(temp_pend) + int(temp_conc))}')
                 self.interf()
             #Relatório
             case 5:
@@ -71,7 +78,7 @@ class Indexador:
                     arm = arm.dir
                 #Verificando se a lista concluida não está cheia
                 if tempo_conc != self.lista_pendente.tempo_projeto:
-                    print('Não é possível encerrar, ainda há tarefas pendentes!\n')
+                    print('Não é possível encerrar, o projeto ainda não está 100% completo! (100% do tempo disponível deve ser usado)\n')
                     self.interf()
                 else:
                     print('Encerrando!')
@@ -79,7 +86,7 @@ class Indexador:
 class No:
     def __init__(self, nome, tempo_tarefa):
         self.nome = nome
-        self.tempo_tarefa = tempo_tarefa
+        self.tempo_tarefa = int(tempo_tarefa)
         self.esq = None
         self.dir = None
 #Classe Lista
@@ -147,17 +154,6 @@ class Lista:
                     arm.dir = None
                 self.tamanho -= 1
                 return arm
-    #Função pra calcular o tempo restante
-    def temp_rest(self):
-        arm = self.inicio
-        while arm:
-            totaltaref += int(arm.tempo_tarefa)
-            arm = arm.dir
-        res = self.tempo_projeto - totaltaref
-        if(res == 0):
-            print(f'O projeto já foi terminado e pode ser encerrado!\n')
-        else:
-            print(f'O tempo restante para terminar o projeto é {res}\n')
     #Função pra imprimir a lista de tarefas
     def imprimir(self):
         arm = self.inicio
