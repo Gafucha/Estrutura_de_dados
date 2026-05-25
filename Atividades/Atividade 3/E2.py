@@ -67,8 +67,6 @@ class AVL:
             no.dir = self._rotacao_direita(no.dir)
             return self._rotacao_esquerda(no)
         return no   #Nó já balanceado
-
-
     #Método para inserir um elemento na árvore AVL (lembrem-se que não há valores repetidos)
     def inserir(self, novo):        
         self.raiz = self._inserir(self.raiz, novo)
@@ -111,8 +109,6 @@ class AVL:
         while no.esq is not None:
             no = no.esq
         return no
-
-
     #Método para buscar um valor/elemento
     def buscar(self, cod):        
         return self._buscar(self.raiz, cod)
@@ -153,9 +149,6 @@ class AVL:
         if valor < no.cod:
             return self._localizar(no.esq, valor)
         return self._localizar(no.dir, valor)
-
-
-
 #####Menu de opções
 arv = AVL()
 ind = int(0)
@@ -188,30 +181,43 @@ while(ind != 6):
             ind = int(0)
         #2. Alerta de extinção
         case 2:
-            print('Faltou fazer')
+            try:
+                busc = int(input('\nInsira o código de um animal para alterar: '))
+                arm = arv.buscar(busc)
+                if(arm == False):
+                    print('\nO código inserido não foi encontrado\n')
+                else:
+                    try:
+                        rar = int(input('\nInsira a nova raridade do animal: '))
+                        arm.cod = rar
+                        print('\nCódigo do animal alterado com sucesso!\n')
+                    except:
+                        print('\nO código precisa ser numérico (A operação foi cancelada)\n')
+            except:
+                print('\nO código inserido precisa ser números inteiros\n')
             ind = int(0)
         #3. Resgatar espécie mais rara
         case 3:
-            try:
-                busc = int(input('\nInsira o código de um ativo para buscar: '))
-                arm = arv.buscar(busc)
-                if(arm == False):
-                    print('O valor não foi encontrado')
-                else:
-                    arv.buscar(arm)
-                    arv.remover(arm)
-            except:
-                print('\nO código inserido não era numérico')
+            arm = arv.raiz
+            if(arm == None):
+                print('\nA árvore está vazia!\n')
+            else:
+                while(arm.dir != None):
+                    arm = arm.dir
+                print(f'\nO animal {arm.nome},[Código {arm.cod}] ({arm.nomeci}), do continente {arm.conti} que possui {arm.qtd} amostras, era o animal mais raro e foi resgatado!')
+                arv.remover(arm.cod)
+            ind = int(0)
         #4. Buscar por código
         case 4:
             #Fazendo o usuário inserir um código válido
             try:
-                busc = int(input('\nInsira o código de um ativo para buscar: '))
+                busc = int(input('\nInsira o código de um animal para buscar: '))
                 arm = arv.buscar(busc)
                 if(arm == False):
-                    print('\nO ativo inserido não foi encontrado\n')
+                    print('\nO código inserido não foi encontrado\n')
                 else:
-                    print(f'\nCódigo do ativo: {arm.cod}\nTicker: {arm.tick}\nNome da empresa: {arm.nome}\nSetor: {arm.setor}\nCotação: R${arm.cota}\nQuantidade de cotas: {arm.qtd}\nTipo do ativo: {arm.tipo}\nValor total em custódia: R${arm.cota * arm.qtd}\n')
+                    print('\n~~~~~~~~~~Informações do animal~~~~~~~~~~')
+                    print(f'Código de raridade: {arm.cod}\nContinente de origem: {arm.conti}\nNome comum: {arm.nome}\nNome científico: {arm.nomeci}\nQuantidade de amostras: {arm.qtd} \n')
             except:
                 print('\nO código precisa ser numérico\n')
             ind = int(0)
