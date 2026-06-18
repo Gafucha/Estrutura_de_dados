@@ -91,12 +91,16 @@ class Lista:
     #Função pra remover o primeiro da fila
     def atender(self):
         #Verificando se tem mais de um elemento na lista
-        if self.tamanho <= 1:
+        if self.tamanho < 1:
+            print('A lista está vazia!')
+        #Verificando tem só um elemento
+        elif self.tamanho == 1:
+            print(f'Atendendo o paciente {self.inicio.dado}... (Não há mais ninguém na fila)')
             self.inicio = None
             self.fim = None
-            self.tamanho = 0
-            print('A lista está vazia!')
-        else:
+            self.tamanho = int(0)
+        else: #Tem mais de um elemento na lista
+            print(f'Atendendo o paciente {self.inicio.dado}... (O próximo da fila é {self.inicio.dir.dado})')
             self.inicio = self.inicio.dir
             self.inicio.esq.dir = None
             self.inicio.esq = None
@@ -137,4 +141,4 @@ class Lista:
 
 #Código
 ind = Indexer()
-ind.iniciar()   
+ind.iniciar()

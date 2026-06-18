@@ -88,6 +88,8 @@ class Lista:
         arm1 = arm1 / self.conc_tamanho
         arm2 = arm2 / self.conc_tamanho
         print(f'O tempo médio de espera foi {arm1}u e o tempo médio de retorno foi {arm2}')
+        if arm1 < 16: print('ARIA reativada com sucesso!')
+        else: print('Infelizmente ARIA não foi restaurada a tempo...')
     #Função execução
     def executar(self):
         #Verificar se a lista está preenchida
@@ -143,6 +145,7 @@ class Lista:
                         self.final = None
                         self.tamanho -=1
                         self.conc_tamanho += 1
+                        self.relatorio()
                     else: #A lista concluida não está vazia
                         #Verificar se tem só um elemento na lista concluida
                         if self.conc_tamanho == 1:
@@ -154,6 +157,7 @@ class Lista:
                             self.final = None
                             self.tamanho -= 1
                             self.conc_tamanho += 1
+                            self.relatorio()
                         else: #Tem mais de um elemento na lista concluida
                             self.inicio.tempo_retorno = self.tempo_total
                             self.conc_final.dir = self.inicio
@@ -163,13 +167,15 @@ class Lista:
                             self.final = None
                             self.tamanho -= 1
                             self.conc_tamanho += 1
+                            self.relatorio()
             else: #O tempo restante é maior que o tempo de execução
                 #Subtrair o tempo de execução do processo
                 self.inicio.tempo_restante -= self.temproc
                 self.tempo_total += self.temproc
-            self.relatorio()
             #Ciclar
             self.ciclar()
+
+
 
 #Teste código
 indexador = Indexer()
