@@ -89,7 +89,6 @@ class Lista:
         #Verificar se a lista está preenchida
         if self.tamanho <= 0: #A lista está vazia
             print('A lista está vazia')
-            self.relatorio()
         else: #No caso da lista não estar vazia
             #Verificando se nessa execução o tempo da tarefa acabará
             if self.inicio.tempo_restante <= self.temproc: #Se o tempo restante for menor que o tempo de execução só executar o tempo restante
@@ -164,6 +163,7 @@ class Lista:
                 #Subtrair o tempo de execução do processo
                 self.inicio.tempo_restante -= self.temproc
                 self.tempo_total += self.temproc
+            self.relatorio()
             #Ciclar
             self.ciclar()
 

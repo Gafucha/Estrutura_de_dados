@@ -70,7 +70,7 @@ class Lista:
                 else: #O primeiro elemento é prioridade
                     #Verificar se o último elemento é prioridade
                     if self.final.prio == bool(False): #Não é prioridade
-                        while arm == bool(True): #Chegando no primeiro elemento não-prioridade
+                        while arm.prio == bool(True): #Chegando no primeiro elemento não-prioridade
                             arm = arm.dir
                         arm.esq.dir = novo
                         novo.esq = arm.esq
