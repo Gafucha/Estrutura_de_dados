@@ -6,29 +6,30 @@ class Indexer:
     #Função para iniciar o código
     def iniciar(self):
         self.ind = 0
-        while self.ind != 1 and self.ind != 2 and self.ind != 3 and self.ind != 4 and self.ind != 5:
-            self.ind = int(input('Qual operação você gostaria de realizar?\n1. Novo paciente\n2. Realizar atendimento\n3. Ver a fila para atendimento\n4. Buscar por um paciente\n5. Encerrar operações\nInsira apenas o número da operação: '))
-        match self.ind:
-            #1. Inserir paciente
-            case 1:
-                #Pedir o nome do paciente e a prioridade
-                self.lista.inserir(input('Insira o nome do paciente: '), input('O paciente é prioridade? (sim ou não) '))
-                self.iniciar()
-            #2. Realizar atendimento
-            case 2:
-                self.lista.atender()
-                self.iniciar()
-            #3. Listar
-            case 3:
-                self.lista.imprimir()
-                self.iniciar()
-            #4. Buscar
-            case 4:
-                self.lista.buscar(input('Insira o nome do paciente: '))
-                self.iniciar()
-            #5. Cancelar
-            case 5:
-                print('Encerrando...')
+        while self.ind != 5:
+            while self.ind != 1 and self.ind != 2 and self.ind != 3 and self.ind != 4 and self.ind != 5:
+                self.ind = int(input('Qual operação você gostaria de realizar?\n1. Novo paciente\n2. Realizar atendimento\n3. Ver a fila para atendimento\n4. Buscar por um paciente\n5. Encerrar operações\nInsira apenas o número da operação: '))
+            match self.ind:
+                #1. Inserir paciente
+                case 1:
+                    #Pedir o nome do paciente e a prioridade
+                    self.lista.inserir(input('Insira o nome do paciente: '), input('O paciente é prioridade? (sim ou não) '))
+                    self.ind = int(0)
+                #2. Realizar atendimento
+                case 2:
+                    self.lista.atender()
+                    self.ind = int(0)
+                #3. Listar
+                case 3:
+                    self.lista.imprimir()
+                    self.ind = int(0)
+                #4. Buscar
+                case 4:
+                    self.lista.buscar(input('Insira o nome do paciente: '))
+                    self.ind = int(0)
+                #5. Cancelar
+                case 5:
+                    print('Encerrando...')
 
 #Criando a classe de Nó
 class No:

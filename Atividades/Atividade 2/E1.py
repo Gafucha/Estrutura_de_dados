@@ -115,20 +115,19 @@ class Lista:
                 self.final = arm.esq
                 arm.esq = None
                 self.inicio.esq = self.final
-                self.final.dir = self.final
+                self.final.dir = self.inicio
             else: #É algum valor dentro da lista, mas não é nenhum dos especificados acima
                 arm.esq.dir = arm.dir
                 arm.dir.esq = arm.esq
                 arm.esq = None
                 arm.dir = None
-            arm = None
             self.tamanho -= 1
 
 
 
 #Teste do código
 lista = Lista()
-lista.inserir('w') #Teste de erro da inserção
+lista.inserir('w')
 lista.inserir(1)
 lista.inserir(2)
 lista.inserir(3)
@@ -137,11 +136,11 @@ print('Primeira lista~~')
 lista.imprimir()
 print('\n')
 print('Segunda lista~~')
-lista.inserirpos(5, 5)
+lista.inserirpos(5, 3)
 lista.inserirpos('w', 'w') #Teste de erro da inserção por posição
 lista.imprimir()
 print('\n')
 print('Terceira lista~~')
 lista.remover(5)
-lista.remover('w') #Teste de erro da remoção
+lista.remover('w')
 lista.imprimir()

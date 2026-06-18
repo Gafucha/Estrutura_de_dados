@@ -6,19 +6,23 @@ class Indexer:
     #Função para iniciar o código
     def iniciar(self):
         self.ind = 0
-        while self.ind != 1 and self.ind != 2:
-            self.ind = int(input('Qual operação você gostaria de realizar?\n1. Inserir processo\n2. Iniciar o programa\nInsira apenas o número da operação: '))
-        match self.ind:
-            #1. Inserir processo
-            case 1:
-                #Pedir o nome do processo e o tempo da tarefa
-                self.lista.inserir(input('Insira o nome do processo? '), int(input('Quanto tempo o processo tem? ')))
-                self.iniciar()
-            #2. Iniciar programa
-            case 2:
-                self.lista.temproc = int(input('Quantas unidades de tempo serão usadas por processamento? '))
-                self.lista.executar()
-                self.iniciar()
+        while self.ind != 3:
+            while self.ind != 1 and self.ind != 2 and self.ind != 3:
+                self.ind = int(input('Qual operação você gostaria de realizar?\n1. Inserir processo\n2. Iniciar o programa\n3. Encerrar\nInsira apenas o número da operação: '))
+            match self.ind:
+                #1. Inserir processo
+                case 1:
+                    #Pedir o nome do processo e o tempo da tarefa
+                    self.lista.inserir(input('Insira o nome do processo? '), int(input('Quanto tempo o processo tem? ')))
+                    self.ind = int(0)
+                #2. Iniciar programa
+                case 2:
+                    self.lista.temproc = int(input('Quantas unidades de tempo serão usadas por processamento? '))
+                    self.lista.executar()
+                    self.ind = int(0)
+                #3. Encerrar
+                case 3:
+                    print('Encerrando...')
 #Criando a classe de Nó
 class No:
     def __init__(self, dado, tempo_tarefa):
